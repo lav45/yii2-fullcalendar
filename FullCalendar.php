@@ -19,7 +19,7 @@ use yii\helpers\Json;
  *
  * @author Alexey Loban <lav451@gmail.com>
  * @since 1.0
- * @see http://arshaw.com/fullcalendar
+ * @see http://fullcalendar.io
  */
 class FullCalendar extends Widget
 {

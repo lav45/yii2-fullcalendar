@@ -1,6 +1,6 @@
 yii2-fullcalendar
 ===========
-Widget for Yii Framework 2.0 to use [FullCalendar](http://arshaw.com/fullcalendar)
+Widget for Yii Framework 2.0 to use [FullCalendar](http://fullcalendar.io)
 
 Installation
 ------------
@@ -34,7 +34,7 @@ use lav45\widget\FullCalendar;
     'googleCalendar' => true,  // If the plugin displays a Google Calendar. Default false
     'clientOptions' => [
         // put your options and callbacks here
-        // see http://arshaw.com/fullcalendar/docs/
+        // see http://fullcalendar.io/docs/
         'lang' => 'pt-br', // optional, if empty get app language
     ],
 ]); ?>
