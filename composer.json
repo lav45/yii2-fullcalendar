@@ -1,0 +1,32 @@
+{
+    "name": "lav45/yii2-fullcalendar",
+    "description": "Widget for Yii Framework 2.0 to use FullCalendar",
+    "keywords": ["yii2", "extension", "widget", "calendar", "fullcalendar"],
+    "homepage": "https://github.com/lav45/yii2-fullcalendar",
+    "type": "yii2-extension",
+    "license": "BSD 3-Clause",
+    "authors": [
+        {
+            "name": "Alexey Loban",
+            "email": "lav451@gmail.com"
+        }
+    ],
+    "require": {
+        "yiisoft/yii2": "~2.0",
+        "yiisoft/yii2-jui": "~2.0",
+        "yiisoft/yii2-bootstrap": "~2.0",
+        "bower-asset/moment": "~2.10.0",
+        "bower-asset/fullcalendar": "~2.3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "lav45\\widget\\": ""
+        }
+    },
+    "extra": {
+        "asset-installer-paths": {
+            "npm-asset-library": "vendor/npm",
+            "bower-asset-library": "vendor/bower"
+        }
+    }
+}
