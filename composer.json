@@ -12,11 +12,11 @@
         }
     ],
     "require": {
-        "yiisoft/yii2": "~2.0",
-        "yiisoft/yii2-jui": "~2.0",
-        "yiisoft/yii2-bootstrap": "~2.0",
-        "bower-asset/moment": "~2.10.0",
-        "bower-asset/fullcalendar": "~2.3.0"
+        "yiisoft/yii2": "2.0.*",
+        "yiisoft/yii2-jui": "2.0.*",
+        "yiisoft/yii2-bootstrap": "2.*",
+        "bower-asset/moment": "2.10.*",
+        "bower-asset/fullcalendar": "2.*"
     },
     "autoload": {
         "psr-4": {
