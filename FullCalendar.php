@@ -59,8 +59,12 @@ class FullCalendar extends Widget
 
         if ($this->clientOptions !== false) {
             $language = isset($this->clientOptions['lang']) ? $this->clientOptions['lang'] : Yii::$app->language;
-            $language = strtolower($language);
-            if ($language != 'en-us') {
+            $basePath = "{$asset->basePath}/lang";
+
+            if (!file_exists($basePath . "/{$language}.js")) {
+                $language = locale_get_primary_language($language);
+            }
+            if (file_exists($basePath . "/{$language}.js")) {
                 $view->registerJsFile("{$asset->baseUrl}/lang/{$language}.js", [
                     'depends' => ['lav45\widget\FullCalendarAsset']
                 ]);
