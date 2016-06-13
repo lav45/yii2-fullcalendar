@@ -10,7 +10,7 @@
 namespace lav45\widget;
 
 use Yii;
-use yii\bootstrap\Widget;
+use yii\base\Widget;
 use yii\helpers\Html;
 use yii\helpers\Json;
 
@@ -27,6 +27,28 @@ class FullCalendar extends Widget
      * @var boolean If the plugin displays a Google Calendar.
      */
     public $googleCalendar = false;
+    /**
+     * @var array the options for the underlying JS plugin.
+     */
+    public $clientOptions = [];
+    /**
+     * @var array the HTML attributes for the widget container tag.
+     * @see \yii\helpers\Html::renderTagAttributes() for details on how attributes are being rendered.
+     */
+    public $options = [];
+
+    /**
+     * Initializes the widget.
+     * This method will register the bootstrap asset bundle. If you override this method,
+     * make sure you call the parent implementation first.
+     */
+    public function init()
+    {
+        parent::init();
+        if (!isset($this->options['id'])) {
+            $this->options['id'] = $this->getId();
+        }
+    }
 
     /**
      * Runs the widget.
@@ -55,10 +77,9 @@ class FullCalendar extends Widget
             GoogleCalendarAsset::register($view);
         }
 
-        $id = $this->options['id'];
-
         if ($this->clientOptions !== false) {
             $language = isset($this->clientOptions['lang']) ? $this->clientOptions['lang'] : Yii::$app->language;
+            $language = strtolower($language);
             $basePath = "{$asset->basePath}/lang";
 
             if (!file_exists($basePath . "/{$language}.js")) {
@@ -68,9 +89,11 @@ class FullCalendar extends Widget
                 $view->registerJsFile("{$asset->baseUrl}/lang/{$language}.js", [
                     'depends' => ['lav45\widget\FullCalendarAsset']
                 ]);
+            } elseif(isset($this->clientOptions['lang'])) {
+                unset($this->clientOptions['lang']);
             }
             $options = empty($this->clientOptions) ? '' : Json::htmlEncode($this->clientOptions);
-            $view->registerJs("jQuery('#{$id}').fullCalendar({$options});");
+            $view->registerJs("jQuery('#{$this->options['id']}').fullCalendar({$options});");
         }
     }
 }
