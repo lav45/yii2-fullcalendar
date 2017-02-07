@@ -1,5 +1,5 @@
 {
-    "name": "lav45/yii2-fullcalendar",
+    "name": "fury93/yii2-fullcalendar",
     "description": "Widget for Yii Framework 2.0 to use FullCalendar",
     "keywords": ["yii2", "extension", "widget", "calendar", "fullcalendar"],
     "homepage": "https://github.com/lav45/yii2-fullcalendar",
@@ -12,10 +12,10 @@
         }
     ],
     "require": {
-        "yiisoft/yii2": "2.0.*",
-        "yiisoft/yii2-jui": "2.0.*",
+        "yiisoft/yii2": "~2.0.10",
+        "yiisoft/yii2-jui": "~2.0.6",
         "bower-asset/moment": "@dev",
-        "bower-asset/fullcalendar": "2.*"
+        "bower-asset/fullcalendar": "^3.1.0"
     },
     "autoload": {
         "psr-4": {
