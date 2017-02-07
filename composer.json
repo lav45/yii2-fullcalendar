@@ -1,10 +1,11 @@
 {
-    "name": "fury93/yii2-fullcalendar",
+    "name": "lav45/yii2-fullcalendar",
     "description": "Widget for Yii Framework 2.0 to use FullCalendar",
     "keywords": ["yii2", "extension", "widget", "calendar", "fullcalendar"],
     "homepage": "https://github.com/lav45/yii2-fullcalendar",
     "type": "yii2-extension",
     "license": "BSD 3-Clause",
+    "version": "1.1.0",
     "authors": [
         {
             "name": "Alexey Loban",
@@ -24,7 +25,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.0.x-dev"
+            "dev-master": "1.1.x-dev"
         }
     }
 }
