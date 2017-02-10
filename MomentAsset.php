@@ -4,13 +4,16 @@
  * @copyright Copyright (c) 2015 LAV45!
  * @license http://opensource.org/licenses/BSD-3-Clause
  * @package yii2-fullcalendar
- * @version 1.0.0
  */
 
 namespace lav45\widget;
 
 use yii\web\AssetBundle;
 
+/**
+ * Class MomentAsset
+ * @package lav45\widget
+ */
 class MomentAsset extends AssetBundle
 {
     /**

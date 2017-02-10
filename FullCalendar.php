@@ -4,12 +4,12 @@
  * @copyright Copyright (c) 2015 LAV45!
  * @license http://opensource.org/licenses/BSD-3-Clause
  * @package yii2-fullcalendar
- * @version 1.0.0
  */
 
 namespace lav45\widget;
 
 use Yii;
+use Locale;
 use yii\base\Widget;
 use yii\helpers\Html;
 use yii\helpers\Json;
@@ -18,7 +18,6 @@ use yii\helpers\Json;
  * FullCalendar widget is a Yii2 wrapper for the FullCalendar.
  *
  * @author Alexey Loban <lav451@gmail.com>
- * @since 1.0
  * @see http://fullcalendar.io
  */
 class FullCalendar extends Widget
@@ -28,14 +27,15 @@ class FullCalendar extends Widget
      */
     public $googleCalendar = false;
     /**
+     * @see https://fullcalendar.io/docs
      * @var array the options for the underlying JS plugin.
      */
-    public $clientOptions = [];
+    public $clientOptions;
     /**
      * @var array the HTML attributes for the widget container tag.
      * @see \yii\helpers\Html::renderTagAttributes() for details on how attributes are being rendered.
      */
-    public $options = [];
+    public $options;
 
     /**
      * Initializes the widget.
@@ -55,6 +55,7 @@ class FullCalendar extends Widget
      */
     public function run()
     {
+        $this->registerAsset();
         $this->registerScript();
 
         Html::addCssClass($this->options, 'fullcalendar');
@@ -67,33 +68,69 @@ class FullCalendar extends Widget
      */
     protected function registerScript()
     {
+        $options = empty($this->clientOptions) ? '' : Json::htmlEncode($this->clientOptions);
+        $this->getView()->registerJs("jQuery('#{$this->options['id']}').fullCalendar({$options});");
+    }
+
+    protected function registerAsset()
+    {
         $view = $this->getView();
 
         $asset = FullCalendarAsset::register($view);
+        $this->registerLocale($asset);
 
         PrintAsset::register($view);
 
         if ($this->googleCalendar) {
             GoogleCalendarAsset::register($view);
         }
+    }
 
-        if ($this->clientOptions !== false) {
-            $language = isset($this->clientOptions['lang']) ? $this->clientOptions['lang'] : Yii::$app->language;
-            $language = strtolower($language);
-            $basePath = "{$asset->basePath}/lang";
+    protected function registerLocale($asset)
+    {
+        $language = $this->getLanguage();
+        $basePath = "{$asset->basePath}/locale";
 
-            if (!file_exists($basePath . "/{$language}.js")) {
-                $language = locale_get_primary_language($language);
-            }
-            if (file_exists($basePath . "/{$language}.js")) {
-                $view->registerJsFile("{$asset->baseUrl}/lang/{$language}.js", [
-                    'depends' => ['lav45\widget\FullCalendarAsset']
-                ]);
-            } elseif(isset($this->clientOptions['lang'])) {
-                unset($this->clientOptions['lang']);
-            }
-            $options = empty($this->clientOptions) ? '' : Json::htmlEncode($this->clientOptions);
-            $view->registerJs("jQuery('#{$this->options['id']}').fullCalendar({$options});");
+        if (!file_exists("{$basePath}/{$language}.js")) {
+            $language = $this->getPrimaryLanguage($language);
         }
+        if (file_exists("{$basePath}/{$language}.js")) {
+            $this->clientOptions['locale'] = $language;
+            $this->getView()->registerJsFile("{$asset->baseUrl}/locale/{$language}.js", [
+                'depends' => ['lav45\widget\FullCalendarAsset']
+            ]);
+        } elseif(isset($this->clientOptions['locale'])) {
+            unset($this->clientOptions['locale']);
+        }
+    }
+
+    protected function getLanguage()
+    {
+        /**
+         * locale changed in 3.0 from lang
+         * @see https://fullcalendar.io/docs/text/locale/
+         */
+        if (isset($this->clientOptions['lang'])) {
+            $language = $this->clientOptions['lang'];
+            unset($this->clientOptions['lang']);
+        } elseif(isset($this->clientOptions['locale'])) {
+            $language = $this->clientOptions['locale'];
+        } else {
+            $language = Yii::$app->language;
+        }
+
+        $language = strtolower($language);
+
+        return $language;
+    }
+
+    /**
+     * @param string $locale `en-EN`, `ru-RU`
+     * @return string en or ru
+     */
+    protected function getPrimaryLanguage($locale)
+    {
+        return extension_loaded('intl') ?
+            Locale::getPrimaryLanguage($locale) : substr($locale, 0, 2);
     }
 }

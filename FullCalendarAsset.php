@@ -4,19 +4,15 @@
  * @copyright Copyright (c) 2015 LAV45!
  * @license http://opensource.org/licenses/BSD-3-Clause
  * @package yii2-fullcalendar
- * @version 1.0.0
  */
 
 namespace lav45\widget;
 
-use Yii;
 use yii\web\AssetBundle;
 
 /**
- * Asset bundle for FullCalendar
- *
- * @author Alexey Loban <lav451@gmail.com>
- * @since 1.0
+ * Class FullCalendarAsset
+ * @package lav45\widget
  */
 class FullCalendarAsset extends AssetBundle
 {
@@ -25,19 +21,19 @@ class FullCalendarAsset extends AssetBundle
      */
     public $sourcePath = '@bower/fullcalendar/dist';
     /**
-     * @inheritdoc
+     * @var array
      */
     public $js = [
         'fullcalendar.js'
     ];
     /**
-     * @inheritdoc
+     * @var array
      */
     public $css = [
         'fullcalendar.css'
     ];
     /**
-     * @inheritdoc
+     * @var array
      */
     public $depends = [
         'yii\jui\JuiAsset',
