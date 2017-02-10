@@ -15,6 +15,12 @@
         "yiisoft/yii2": "2.0.*",
         "bower-asset/fullcalendar": "3.*"
     },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
+        }
+    ],
     "autoload": {
         "psr-4": {
             "lav45\\widget\\": ""
