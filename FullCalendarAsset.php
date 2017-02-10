@@ -36,7 +36,7 @@ class FullCalendarAsset extends AssetBundle
      * @var array
      */
     public $depends = [
-        'yii\jui\JuiAsset',
+        'yii\web\JqueryAsset',
         'lav45\widget\MomentAsset',
     ];
 }
