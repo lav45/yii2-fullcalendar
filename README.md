@@ -10,7 +10,7 @@ The preferred way to install this extension is through [composer](http://getcomp
 Either run
 
 ```
-php composer.phar require --prefer-dist lav45/yii2-fullcalendar "~1.0"
+~$ composer require lav45/yii2-fullcalendar
 ```
 
 or add
